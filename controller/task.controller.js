@@ -41,14 +41,15 @@ taskController.updateTask = async (req, res) => {
         const task = await Task.findOne({_id: req.params.id});
 
         // 통신에 문제가 없지만 id에 맞는 할 일이 발견되지 않을 시
-        if (task.length ===  0) {
+        if(!task) {
             res.status(404).json({
                 status: 'fail',
                 message: `can't find todo from id:${req.params.id}`
             });
         }
         
-        task.isComplete = req.body.isComplete;
+        // 상태가 true라면 false로, false라면 true로
+        task.isComplete = !task.isComplete;
         await task.save();
 
         res.status(200).json({
