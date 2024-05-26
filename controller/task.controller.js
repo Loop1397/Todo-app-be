@@ -12,10 +12,10 @@ taskController.createTask = async (req, res) => {
             status: 'success',
             data: newTask
         });
-    } catch(err) {
+    } catch(error) {
         res.status(400).json({
             status: 'fail',
-            error: err
+            error
         });
     }
 }
@@ -28,10 +28,10 @@ taskController.getTask = async (req, res) => {
             status: 'success',
             data: taskList
         });
-    } catch(err) {
+    } catch(error) {
         res.status(400).json({
             status: 'fail',
-            error: err
+            error
         });
     }
 }
@@ -39,7 +39,6 @@ taskController.getTask = async (req, res) => {
 taskController.updateTask = async (req, res) => {
     try {
         const task = await Task.findOne({_id: req.params.id});
-
         // 통신에 문제가 없지만 id에 맞는 할 일이 발견되지 않을 시
         if(!task) {
             res.status(404).json({
@@ -56,10 +55,10 @@ taskController.updateTask = async (req, res) => {
             status: 'success',
             data: task
         });
-    } catch(err) {
+    } catch(error) {
         res.status(400).json({
             status: 'fail',
-            error: err
+            error
         });
     }
 }
@@ -72,10 +71,10 @@ taskController.deleteTask = async (req, res) => {
             status: 'success',
             data: deletedItem
         });
-    } catch(err) {
+    } catch(error) {
         res.status(400).json({
             status: 'fail',
-            error: err
+            error
         });
     }
 }
