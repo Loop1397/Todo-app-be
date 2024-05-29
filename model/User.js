@@ -38,7 +38,7 @@ userSchema.methods.toJSON = function () {
 
 // jwt를 생성하고 반환하는 함수
 userSchema.methods.generateToken = function () {
-    const token = jwt.sign({_id: this._id}, JWT_SECRET_KEY, {expiresIn: '1d'});
+    const token = jwt.sign({_id: this._id}, JWT_SECRET_KEY, {expiresIn: '1h'});
     return token;
 };
 

@@ -10,6 +10,11 @@ const taskSchema = Schema({
     isComplete: {
         type: Boolean,
         require: true
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        require:true,
+        ref: "User"
     }
 }, 
     // timestamps: createdAt, updatedAt을 자동으로 추가해주는 옵션
