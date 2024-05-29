@@ -1,5 +1,5 @@
-const User = require("../model/user");
-const bcrypt = require('bcrypt');
+const User = require("../model/User");
+const bcrypt = require('bcryptjs');
 
 // 비밀번호를 해쉬화해서 저장하기 위해 bcrypt 사용
 // 암호화 횟수
@@ -60,8 +60,24 @@ userController.loginWithEmail = async (req, res) => {
     } catch(error) {
         res.status(400).json({
             status: "fail",
-            error
+            message: error.message
         })
+    }
+}
+
+userController.getUser = async (req, res) => {
+    try {
+        // const userId = req.userId와 동일
+        const {userId} = req;
+        const user = await User.findById(userId);
+
+        if(!user) {
+            throw new Error("can not find user");
+        }
+
+        res.status(200).json({status: "success", user});
+    } catch(error) {
+        res.status(400).json({status: "fail", message: error.message});
     }
 }
 

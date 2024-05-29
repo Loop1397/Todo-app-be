@@ -24,11 +24,9 @@ authController.authenticate = (req, res, next) => {
             if(error) {
                 throw new Error("invalid token");
             }
-
-            res.status(200).json({statue: "success", userId: payload._id})
+            // req에 userId를 추가함
+            req.userId = payload._id;
         });
-        // req에 userId를 추가함
-        req.userId = payload._id;
 
         // next는 미들웨어
         // 위의 처리가 다 끝난 후 다음 작업으로 넘어가기 위해서 사용하는 메소드임
